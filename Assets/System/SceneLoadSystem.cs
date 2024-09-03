@@ -19,6 +19,7 @@ public class SceneLoadSystem : MonoBehaviour
     private IEnumerator LoadMainScene()
     {
         yield return new WaitUntil(() => NetworkManager.Singleton != null);
+        LoadScene(SceneType.MainScene);
     }
 
     public void ReLoadScene()

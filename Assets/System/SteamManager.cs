@@ -37,14 +37,6 @@ public class SteamManager : MonoBehaviour
         await lobby.Join();
     }
 
-    private void LobbyEntered(Lobby lobby)
-    {
-        LobbySaveSystem.Instance.CurrentLobby = lobby;
-        lobbyID.text = lobby.Id.ToString();
-        mainMenu.SetActive(false);
-        inLobbyMenu.SetActive(true);
-    }
-
     private void LobbyCreated(Result result, Lobby lobby)
     {
         if (result == Result.OK)
@@ -54,18 +46,31 @@ public class SteamManager : MonoBehaviour
         }
     }
 
+    private void LobbyEntered(Lobby lobby)
+    {
+        LobbySaveSystem.Instance.CurrentLobby = lobby;
+        lobbyID.text = lobby.Id.ToString();
+        mainMenu.SetActive(false);
+        inLobbyMenu.SetActive(true);
+
+        Debug.Log("Entered");
+    }
+
     public async void CreateHostLoby()
     {
+        Debug.Log("HostLoby");
         await SteamMatchmaking.CreateLobbyAsync(maxMember);
     }
 
     public async void JoinLobyWithID()
     {
         ulong id;
+        Debug.Log("JoinLoby");
 
         if (!ulong.TryParse(lobyIDInputField.text, out id))
             return;
 
+        Debug.Log("JoinLoby");
         Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
         foreach (var lobby in lobbies)
