@@ -49,28 +49,24 @@ public class SteamManager : MonoBehaviour
     private void LobbyEntered(Lobby lobby)
     {
         LobbySaveSystem.Instance.CurrentLobby = lobby;
-        lobbyID.text = lobby.Id.ToString();
-        mainMenu.SetActive(false);
-        inLobbyMenu.SetActive(true);
+        lobbyID.text = $"{lobby.Id}";
+        CheckUI();
 
         Debug.Log("Entered");
     }
 
     public async void CreateHostLoby()
     {
-        Debug.Log("HostLoby");
         await SteamMatchmaking.CreateLobbyAsync(maxMember);
     }
 
     public async void JoinLobyWithID()
     {
         ulong id;
-        Debug.Log("JoinLoby");
 
         if (!ulong.TryParse(lobyIDInputField.text, out id))
             return;
 
-        Debug.Log("JoinLoby");
         Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
         foreach (var lobby in lobbies)
@@ -80,6 +76,37 @@ public class SteamManager : MonoBehaviour
                 await lobby.Join();
                 return;
             }
+        }
+    }
+
+    public void LeaveLobby()
+    {
+        LobbySaveSystem.Instance.CurrentLobby?.Leave();
+        LobbySaveSystem.Instance.CurrentLobby = null;
+        Debug.Log("Leave");
+        CheckUI();
+    }
+
+    public void CopyID()
+    {
+        TextEditor textEditor = new();
+        textEditor.text = lobbyID.text;
+        textEditor.SelectAll();
+        textEditor.Copy();
+    }
+
+
+    private void CheckUI()
+    {
+        if (LobbySaveSystem.Instance.CurrentLobby == null)
+        {
+            mainMenu.SetActive(true);
+            inLobbyMenu.SetActive(false);
+        }
+        else
+        {
+            mainMenu.SetActive(false);
+            inLobbyMenu.SetActive(true);
         }
     }
 }

@@ -5,5 +5,5 @@ using Steamworks.Data;
 
 public class LobbySaveSystem : Singleton<LobbySaveSystem>
 {
-    public Lobby CurrentLobby;
+    public Lobby? CurrentLobby;
 }
