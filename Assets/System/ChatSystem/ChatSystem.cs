@@ -18,7 +18,11 @@ public class ChatSystem : MonoBehaviour
     private void OnEnable()
     {
         SteamMatchmaking.OnChatMessage += ChatSent;
+        SteamMatchmaking.OnLobbyEntered += LobbyEntered;
+        SteamMatchmaking.OnLobbyMemberJoined += LobbyMemberJoined;
+        SteamMatchmaking.OnLobbyMemberLeave += LobbyMemberLeave;
     }
+
 
     private void Start()
     {
@@ -52,6 +56,24 @@ public class ChatSystem : MonoBehaviour
         }
     }
 
+    #region LobbyStateMsg
+    private void LobbyEntered(Lobby lobby)
+    {
+        AddMessageToBox("You Entered the Lobby");
+    }
+
+    private void LobbyMemberLeave(Lobby lobby, Friend friend)
+    {
+        AddMessageToBox($"{friend.Name} Left the Lobby");
+    }
+
+    private void LobbyMemberJoined(Lobby lobby, Friend friend)
+    {
+        AddMessageToBox($"{friend.Name} Join the Lobby");
+    }
+    #endregion
+
+    #region Chat
     private void ChatSent(Lobby lobby, Friend friend, string msg)
     {
         AddMessageToBox(msg);
@@ -62,4 +84,5 @@ public class ChatSystem : MonoBehaviour
         GameObject message = Instantiate(messageTemplate.gameObject, messageContainer.transform);
         message.GetComponent<TextMeshProUGUI>().text = msg;
     }
+    #endregion
 }
