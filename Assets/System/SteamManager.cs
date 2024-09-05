@@ -64,7 +64,6 @@ public class SteamManager : MonoBehaviour
 
     public async void CreateHostLoby()
     {
-        Debug.Log(maxMember);
         await SteamMatchmaking.CreateLobbyAsync(maxMember);
     }
 
