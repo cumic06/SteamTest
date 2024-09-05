@@ -5,6 +5,9 @@ using Steamworks;
 using TMPro;
 using Steamworks.Data;
 using System;
+using Unity.Netcode;
+using Netcode.Transports.Facepunch;
+using UnityEngine.SceneManagement;
 
 public class SteamManager : MonoBehaviour
 {
@@ -32,6 +35,7 @@ public class SteamManager : MonoBehaviour
         SteamFriends.OnGameLobbyJoinRequested -= GameLobbyJoinRequseted;
     }
 
+    #region Lobby
     private async void GameLobbyJoinRequseted(Lobby lobby, SteamId id)
     {
         await lobby.Join();
@@ -43,6 +47,7 @@ public class SteamManager : MonoBehaviour
         {
             lobby.SetPublic();
             lobby.SetJoinable(true);
+            NetworkManager.Singleton.StartHost();
         }
     }
 
@@ -52,7 +57,9 @@ public class SteamManager : MonoBehaviour
         lobbyID.text = $"{lobby.Id}";
         CheckUI();
 
-        Debug.Log("Entered");
+        if (NetworkManager.Singleton.IsHost) return;
+        NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+        NetworkManager.Singleton.StartClient();
     }
 
     public async void CreateHostLoby()
@@ -61,7 +68,7 @@ public class SteamManager : MonoBehaviour
         await SteamMatchmaking.CreateLobbyAsync(maxMember);
     }
 
-    public async void JoinLobyWithID()
+    public async void JoinLobbyWithID()
     {
         ulong id;
 
@@ -84,9 +91,11 @@ public class SteamManager : MonoBehaviour
     {
         LobbySaveSystem.Instance.CurrentLobby?.Leave();
         LobbySaveSystem.Instance.CurrentLobby = null;
-        Debug.Log("Leave");
+        NetworkManager.Singleton.Shutdown();
         CheckUI();
     }
+    #endregion
+
 
     public void CopyID()
     {
@@ -108,6 +117,14 @@ public class SteamManager : MonoBehaviour
         {
             mainMenu.SetActive(false);
             inLobbyMenu.SetActive(true);
+        }
+    }
+
+    public void StartGameSever()
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(SceneType.GameScene.ToString(), LoadSceneMode.Single);
         }
     }
 }

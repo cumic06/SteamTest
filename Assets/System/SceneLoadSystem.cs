@@ -5,11 +5,12 @@ using Unity.Netcode;
 
 public enum SceneType
 {
+    StartUp,
     MainScene,
-    Stage1
+    GameScene
 }
 
-public class SceneLoadSystem : MonoBehaviour
+public class SceneLoadSystem : Singleton<SceneLoadSystem>
 {
     private void Start()
     {
