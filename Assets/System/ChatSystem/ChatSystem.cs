@@ -39,21 +39,12 @@ public class ChatSystem : MonoBehaviour
 
     private void ToggleChatBox()
     {
-        if (messageInputField.gameObject.activeSelf)
+        if (!String.IsNullOrEmpty(messageInputField.text))
         {
-            if (!String.IsNullOrEmpty(messageInputField.text))
-            {
-                LobbySaveSystem.Instance.CurrentLobby?.SendChatString(messageInputField.text);
-                messageInputField.text = "";
-            }
-            messageInputField.gameObject.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(null);
+            LobbySaveSystem.Instance.CurrentLobby?.SendChatString(messageInputField.text);
+            messageInputField.text = "";
         }
-        else
-        {
-            messageInputField.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(messageInputField.gameObject);
-        }
+        EventSystem.current.SetSelectedGameObject(messageInputField.gameObject);
     }
 
     #region LobbyStateMsg

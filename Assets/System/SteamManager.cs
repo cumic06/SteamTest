@@ -123,6 +123,7 @@ public class SteamManager : MonoBehaviour
     {
         if (NetworkManager.Singleton.IsHost)
         {
+            Debug.Log(NetworkManager.Singleton.ConnectedHostname);
             NetworkManager.Singleton.SceneManager.LoadScene(SceneType.GameScene.ToString(), LoadSceneMode.Single);
         }
     }
