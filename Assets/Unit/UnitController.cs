@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
 {
     #region Value
@@ -54,4 +54,9 @@ public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
     #endregion
 
     protected abstract void Move();
+
+    protected virtual void Jump()
+    {
+
+    }
 }

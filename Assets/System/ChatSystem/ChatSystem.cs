@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Steamworks;
 using Steamworks.Data;
+using Unity.VisualScripting;
 
 public class ChatSystem : MonoBehaviour
 {
@@ -21,8 +22,19 @@ public class ChatSystem : MonoBehaviour
         SteamMatchmaking.OnLobbyEntered += LobbyEntered;
         SteamMatchmaking.OnLobbyMemberJoined += LobbyMemberJoined;
         SteamMatchmaking.OnLobbyMemberLeave += LobbyMemberLeave;
+        messageTemplate.text = "";
+
+        Debug.Log("Enable");
     }
 
+    private void OnDisable()
+    {
+
+        SteamMatchmaking.OnChatMessage -= ChatSent;
+        SteamMatchmaking.OnLobbyEntered -= LobbyEntered;
+        SteamMatchmaking.OnLobbyMemberJoined -= LobbyMemberJoined;
+        SteamMatchmaking.OnLobbyMemberLeave -= LobbyMemberLeave;
+    }
 
     private void Start()
     {
@@ -67,7 +79,8 @@ public class ChatSystem : MonoBehaviour
     #region Chat
     private void ChatSent(Lobby lobby, Friend friend, string msg)
     {
-        AddMessageToBox(msg);
+        AddMessageToBox($"{friend.Name} : {msg}");
+        Debug.Log(msg);
     }
 
     private void AddMessageToBox(string msg)

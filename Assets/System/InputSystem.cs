@@ -52,4 +52,14 @@ public class InputSystem : Singleton<InputSystem>
             keysDic.Add(keyType, keyCode);
         }
     }
+
+    public float GetInputHorizontal()
+    {
+        return Input.GetAxis("Horizontal");
+    }
+
+    public float GetInputVertical()
+    {
+        return Input.GetAxis("Vertical");
+    }
 }

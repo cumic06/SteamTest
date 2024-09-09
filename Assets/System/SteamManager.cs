@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 public class SteamManager : MonoBehaviour
 {
     private Lobby currentLobby;
-    public int maxMember = 4;//테스트라 일단 4
+    public int maxMember = 2;//테스트라 일단 2
 
     public GameObject mainMenu;
     public GameObject inLobbyMenu;
@@ -58,6 +58,7 @@ public class SteamManager : MonoBehaviour
         CheckUI();
 
         if (NetworkManager.Singleton.IsHost) return;
+
         NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
         NetworkManager.Singleton.StartClient();
     }
@@ -95,6 +96,13 @@ public class SteamManager : MonoBehaviour
     }
     #endregion
 
+    public void StartGameSever()
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(SceneType.GameScene.ToString(), LoadSceneMode.Single);
+        }
+    }
 
     public void CopyID()
     {
@@ -116,15 +124,6 @@ public class SteamManager : MonoBehaviour
         {
             mainMenu.SetActive(false);
             inLobbyMenu.SetActive(true);
-        }
-    }
-
-    public void StartGameSever()
-    {
-        if (NetworkManager.Singleton.IsHost)
-        {
-            Debug.Log(NetworkManager.Singleton.ConnectedHostname);
-            NetworkManager.Singleton.SceneManager.LoadScene(SceneType.GameScene.ToString(), LoadSceneMode.Single);
         }
     }
 }

@@ -637,6 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 5445153261067352100, guid: ad43d0f38ec825f4c8899d02fba2f3b0, type: 3}
+  Player2: {fileID: 5445153261067352100, guid: 286ba008bb6888c4283ed1c80cbca7f7, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
