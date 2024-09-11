@@ -74,6 +74,7 @@ public class ChatSystem : MonoBehaviour
     {
         AddMessageToBox($"{friend.Name} Join the Lobby");
     }
+    #endregion
 
     #region Chat
     private void ChatSent(Lobby lobby, Friend friend, string msg)

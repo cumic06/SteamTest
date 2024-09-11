@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSpawnerSystem : NetworkBehaviour
 {
-    public GameObject Player;
+    public GameObject playerPrefab;
 
     private void Start()
     {
@@ -21,11 +21,11 @@ public class PlayerSpawnerSystem : NetworkBehaviour
 
     private void SceneLoaded(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        if (IsHost && sceneName == SceneType.GameScene.ToString())
+        if (IsHost && sceneName == $"{SceneType.GameScene}")
         {
             foreach (ulong id in clientsCompleted)
             {
-                GameObject player = Instantiate(Player);
+                GameObject player = Instantiate(playerPrefab);
                 player.GetComponent<NetworkObject>().SpawnAsPlayerObject(id, true);
             }
         }

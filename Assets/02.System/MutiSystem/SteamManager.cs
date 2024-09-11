@@ -98,9 +98,7 @@ public class SteamManager : MonoBehaviour
     public void StartGameSever()
     {
         if (NetworkManager.Singleton.IsHost)
-        {
             NetworkManager.Singleton.SceneManager.LoadScene(SceneType.GameScene.ToString(), LoadSceneMode.Single);
-        }
     }
 
     public void CopyID()
@@ -110,7 +108,6 @@ public class SteamManager : MonoBehaviour
         textEditor.SelectAll();
         textEditor.Copy();
     }
-
 
     private void CheckUI()
     {
