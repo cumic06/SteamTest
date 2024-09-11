@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -576301815939612005}
   - component: {fileID: -542721858553169888}
   - component: {fileID: 9110180238100506076}
+  - component: {fileID: -7888651242185999388}
   - component: {fileID: -7661252821421326243}
   m_Layer: 0
   m_Name: Slime
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3991239106
+  GlobalObjectIdHash: 2430134726
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -271,6 +272,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: -7661252821421326243}
+--- !u!114 &-7888651242185999388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445153261067352100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66345918619e21146b1a7e88696d8763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &-7661252821421326243
 Animator:
   serializedVersion: 5
@@ -281,7 +294,7 @@ Animator:
   m_GameObject: {fileID: 5445153261067352100}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e5c0d305c013514e8cf506143051fad, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

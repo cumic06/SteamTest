@@ -24,7 +24,7 @@ public class ChatSystem : MonoBehaviour
         SteamMatchmaking.OnLobbyMemberLeave += LobbyMemberLeave;
         messageTemplate.text = "";
 
-        Debug.Log("Enable");
+        //Debug.Log("Enable");  
     }
 
     private void OnDisable()
@@ -74,13 +74,11 @@ public class ChatSystem : MonoBehaviour
     {
         AddMessageToBox($"{friend.Name} Join the Lobby");
     }
-    #endregion
 
     #region Chat
     private void ChatSent(Lobby lobby, Friend friend, string msg)
     {
         AddMessageToBox($"{friend.Name} : {msg}");
-        Debug.Log(msg);
     }
 
     private void AddMessageToBox(string msg)

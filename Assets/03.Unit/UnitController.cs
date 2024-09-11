@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+public enum AnimationType
+{
+    Idle,
+    Walk,
+    Run,
+    Hit,
+    Dead
+}
+
 [RequireComponent(typeof(CapsuleCollider2D))]
 public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
 {
@@ -15,6 +24,7 @@ public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
 
     protected Rigidbody2D rigid;
     protected CapsuleCollider2D capsuleCollider;
+    protected SpriteRenderer spriteRenderer;
 
     public Action onDamageAction;
     public Action onHealAction;
@@ -22,8 +32,9 @@ public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
 
     protected virtual void Awake()
     {
-        rigid = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        capsuleCollider = GetComponent(typeof(CapsuleCollider2D)) as CapsuleCollider2D;
+        rigid = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Start()
@@ -54,6 +65,8 @@ public abstract class UnitController : NetworkBehaviour, IDamageable, IHealable
     #endregion
 
     protected abstract void Move();
+
+    protected abstract void Flip();
 
     protected virtual void Jump()
     {

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class MonsterController : UnitController
 {
+
     protected override void Move()
     {
+    }
+
+    protected override void Flip()
+    {
+        throw new System.NotImplementedException();
     }
 }
