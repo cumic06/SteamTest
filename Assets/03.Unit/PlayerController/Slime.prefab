@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: 9110180238100506076}
   - component: {fileID: -7888651242185999388}
   - component: {fileID: -7661252821421326243}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   - {x: 0.2104854, y: -0.18729529, z: 0}
   m_ShapePathHash: 1791413004
   m_Mesh: {fileID: 0}
-  m_InstanceId: 59026
+  m_InstanceId: 40414
   m_LocalBounds:
     m_Center: {x: -0.016010255, y: 0.03220719, z: 0}
     m_Extent: {x: 0.2619474, y: 0.21950248, z: 0}

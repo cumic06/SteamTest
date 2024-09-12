@@ -9,7 +9,7 @@ public class PlayerSpawnerSystem : NetworkBehaviour
 {
     public GameObject playerPrefab;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
     }
